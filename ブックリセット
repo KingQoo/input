@@ -1,0 +1,19 @@
+Sub DeleteSheets()
+   
+   Dim objSheet As Worksheet
+   
+   '削除する時のメッセージを消す
+   Application.DisplayAlerts = False
+   
+   '全部のシートを１つずつチェック
+   For Each objSheet In ThisWorkbook.Worksheets
+      If (objSheet.Name <> "Sheet1") Then
+         Worksheets(objSheet.Name).Delete
+      End If
+   Next
+   
+   '再度メッセージが表示されるように戻す
+   Application.DisplayAlerts = True
+    
+
+End Sub
