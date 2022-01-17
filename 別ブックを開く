@@ -1,0 +1,39 @@
+Sub Sample3()
+
+   Dim FilePath As String
+   Dim FileName As String
+   Dim wb As Workbook
+   
+   'ファイルの入っているフォルダをパスを設定
+   FilePath = ThisWorkbook.Path
+   'ファイル名を設定
+   FileName = "コピー元.xlsx"
+   
+   'コピー元のブックが存在するか確認
+   If Dir(FilePath & "\" & FileName) = "" Then
+      '既に開いていたらメッセージを表示してSubを抜ける
+      MsgBox FileName & "というファイルが存在しません" & vbCrLf & _
+         "指定のフォルダに該当のファイルを入れて実行し直してください"
+      Exit Sub
+   End If
+   
+   '既に開いているかをチェック
+   For Each wb In Workbooks
+      If wb.Name = FileName Then
+         '既に開いていたらメッセージを表示してSubを抜ける
+         MsgBox FileName & "は既に開いています"
+         Exit Sub
+      End If
+   Next wb
+   
+   'コピー元のブックを開く
+   Workbooks.Open FilePath & "\コピー元.xlsx"
+   
+   'データをコピー
+   Workbooks(FileName).Worksheets("Sheet1").Range("A1:D5").Copy _
+      Workbooks(ThisWorkbook.Name).Worksheets("Sheet1").Range("A1")
+      
+   'コピー元のブックを閉じる(セーブしない)
+    Workbooks(FileName).Close savechanges:=False
+
+End Sub
