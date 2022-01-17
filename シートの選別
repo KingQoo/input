@@ -1,0 +1,8 @@
+Sub シート名にtestを含むワークシートを除外して処理する()
+　Dim ws As Worksheet
+　For Each ws In Worksheets
+　　If InStr(ws.Name, "test") = 0 Then
+　　　MsgBox ws.Name
+　　End If
+　Next
+End Sub
