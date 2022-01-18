@@ -1,0 +1,13 @@
+Function 最終行取得(ByVal sht As Worksheet) As Long
+　　Dim ary As Variant
+　　Dim i As Long, j As Long
+　　ary = sht.Range(sht.Cells(1, 1), sht.Cells.SpecialCells(xlLastCell))
+　　For i = UBound(ary, 1) To LBound(ary, 1) Step -1
+　　　　For j = LBound(ary, 2) To UBound(ary, 2)
+　　　　　　If ary(i, j) <> "" Then
+　　　　　　　　最終行取得 = i
+　　　　　　　　Exit Function
+　　　　　　End If
+　　　　Next j
+　　Next i
+End Function
